@@ -1,0 +1,68 @@
+{% load i18n static %}<!DOCTYPE html>
+{% get_current_language as LANGUAGE_CODE %}{% get_current_language_bidi as LANGUAGE_BIDI %}
+<html lang="{{ LANGUAGE_CODE|default:"id" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
+
+<head>
+    <title>{% block title %}{% endblock %}</title>
+
+    <link href="{% static "default/vendor/bootstrap/css/bootstrap.min.css" %}" rel="stylesheet" media="screen">
+    <link href="{% static "default/css/style.css" %}" rel="stylesheet" media="screen">
+    <link href="{% static "default/css/simple-sidebar.css" %}" rel="stylesheet" media="screen">
+    {% block extrastyles %}{% endblock%}
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-green p-0" id="nav-top">
+      {% comment %}
+      <div class="container-fluid d-flex flex-row p-0">
+        <div class="p-2">
+          <a class="navbar-brand" href="#">
+            <img src="{% static "default/images/logo-prov-jabar.png" %}">
+          </a>
+        </div>
+        <div class="mr-auto p-2">
+          <h5>SISTEM INFORMASI RUANG TERBUKA HIJAU<br>DINAS PERMUKIMAN DAN PERUMAHAN</h5>
+          <small>Tulisan Disini</small>
+        </div>
+        <div class="p-2">
+          <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">
+            <i class="fas fa-align-left"></i>
+          </a>
+        </div>
+      </div>
+      {% endcomment %}
+    </nav>
+
+    <div id="wrapper" class="toggled">
+      {% block sidebar %}{%  endblock %}
+
+      <!-- Page Content -->
+      <div id="page-content-wrapper p-0">
+        <div class="container-fluid p-0">
+          {% block content %}{%  endblock %}
+        </div>
+      </div>
+      <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+</body>
+
+<footer>
+    <!-- Font Awesome JS -->
+    <script defer src="{% static "default/vendor/fontawesome/solid.js" %}"></script>
+    <script defer src="{% static "default/vendor/fontawesome/fontawesome.js" %}"></script>
+
+    <!-- jQuery CDN - Slim version (=without AJAX) -->
+    <script defer src="{% static "default/vendor/jquery/jquery.min.js" %}"></script>
+    <!-- Popper.JS -->
+    <script defer src="{% static "default/vendor/cloudflare/popper.min.js" %}"></script>
+    <!-- Bootstrap JS -->
+    <script defer src="{% static "default/vendor/bootstrap/js/bootstrap.min.js" %}"></script>
+
+    <script defer src="{% static "default/js/style.js" %}"></script>
+    {% block extrajs %}{% endblock%}
+</footer>
+
+</html>

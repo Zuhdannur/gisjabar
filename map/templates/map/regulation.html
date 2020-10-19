@@ -1,0 +1,35 @@
+{% extends "map/base_site.html" %}
+{% load static %}
+
+{% block content %}
+{% if regulation %}
+<div class="row">
+  <div class="col-lg-12">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Title</th>
+          <th scope="col">-</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for reg in regulation %}
+          <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ reg.title }}</td>
+            <td>
+              <a href="{{ reg.filename.url }}" target="_blank">
+                <i class="fas fa-download"></i>
+              </a>
+            </td>
+          </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% else %}
+    <p>Tidak ada file tersedia.</p>
+{% endif %}
+{% endblock %}

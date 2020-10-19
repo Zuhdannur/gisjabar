@@ -1,0 +1,44 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static %}
+
+{% block bodyclass %}{{ opts.app_label }}-{{ opts.object_name.lower }} change-form{% endblock %}
+
+{% block breadcrumbs %}
+	{% if not is_popup %}
+	<div class="breadcrumbs">
+		<a href="../../../../">{% trans "Home" %}</a>
+		<a href="../../../">{{ opts.app_label|capfirst|escape }}</a> ›
+		<a href="../../">{{ opts.verbose_name_plural|capfirst }}</a> ›
+		<a href="../">{{ opts.verbose_name|capfirst }} #{{ entry.pk }}</a> ›
+	  {% trans 'Chart' %}
+	</div>
+	{% endif %}
+{% endblock %}
+
+{% block content %}
+	<div id="content-main">
+		<ul class="object-tools">
+  		<li>
+    		<a href="{{request.META.HTTP_REFERER|escape}}" class="button">{% trans 'Kembali' %}</a>
+			<li>
+		</ul>
+		<div id="chartContainer" style="height: 250px; width: 100%;" align="right"></div>
+	</div>
+{% endblock %}
+
+{% block extrahead %}
+	{{ block.super }}
+	<script type="text/javascript" src="{% static 'default/vendor/jquery/jquery.min.js' %}"></script>
+	<script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+	<script type="text/javascript" src="{% static 'default/js/library.js' %}"></script>
+	<script type="text/javascript">
+	$(document).ready(function () {
+		var cityArea = {{ city_area }};
+		var rthArea = {{ rth_area }};
+		var chart = persentageArea(rthArea, cityArea);
+		chart.render();
+	});
+	</script>
+{% endblock %}
+
+{% block extrastyle %}{{ block.super }}{% endblock %}

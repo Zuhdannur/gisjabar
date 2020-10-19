@@ -1,0 +1,35 @@
+{% extends "map/base_site.html" %}
+{% load static %}
+
+{% block extrastyles %}
+<!-- Leaflet -->
+<link href="{% static "default/vendor/ekkoligthbox/ekko-lightbox.css" %}" rel="stylesheet" media="screen">
+{% endblock %}
+
+{% block extrajs %}
+<script defer src="{% static "default/vendor/ekkoligthbox/ekko-lightbox.js" %}"></script>
+<script defer src="{% static "default/js/image-lightbox.js" %}"></script>
+{% endblock %}
+
+{% block content %}
+{% if galleries %}
+<div class="row">
+  <div class="col-lg-12">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+      <h1 class="h2 p-3">Galeri</h1>
+    </div>
+    <div class="row text-center text-lg-left p-3 border-bottom">
+      {% for gallery in galleries %}
+      <div class="col-lg-3 col-md-4 col-xs-6">
+        <a href="{{ gallery.filename.url }}" class="d-block mb-4 h-100" data-toggle="lightbox" data-gallery="example-gallery" data-type="image" data-title="{{ gallery.caption }}" data-footer="{{ gallery.description }}">
+          <img class="img-fluid img-thumbnail" src="{{ gallery.filename.url }}" alt="{{ gallery.caption }}">
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% else %}
+    <p>Tidak ada file tersedia.</p>
+{% endif %}
+{% endblock %}

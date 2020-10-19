@@ -1,0 +1,77 @@
+{% extends "map/base_site.html" %}
+{% load static %}
+
+{% block extrastyles %}
+<!-- Leaflet -->
+<link href="{% static "default/vendor/leaflet/leaflet.css" %}" rel="stylesheet" media="screen">
+<style>
+    .text-labels {
+            font-size: 1em;
+            font-weight: 700;
+            color: white;
+            /* Use color, background, set margins for offset, etc */
+        }
+</style>
+{% endblock %}
+
+{% block extrajs %}
+<script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js" integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA==" crossorigin=""></script>
+<script defer src="{% static "default/vendor/leaflet/leaflet.ajax.min.js" %}"></script>
+
+<script defer src="{% static "default/js/library.js" %}"></script>
+<script defer src="{% static "default/js/profile-rth.js" %}"></script>
+{% endblock %}
+
+{% block content %}
+<div class="modal fade bd-example-modal-lg" id="map-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content" id="map-content"></div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-12">
+    <div id="filter-wrapper">
+        <input id="urls" value="{% url 'map:profile_desa_rth_filter' %}" hidden>
+        <input id="rth" value="{% url 'map:profile_psu' %}" hidden>
+        <input id="category-urls" value="{% url 'map:category_psu' %}" hidden>
+        <select name="city_filter" id="city_filter" hidden>
+            <option value="">-- Pilih Kecamatan --</option>
+            {% for city in cities %}
+              <option value="{{ city.id }}">{{ city.id }}</option>
+            {% endfor %}
+          </select>
+        <form action="{% url 'map:profile_rth_filter' %}" name="map-filter" id="map-filter">
+          {% csrf_token %}
+          <select name="city" id="city">
+            <option value="">-- Semua Desa --</option>
+            {% for city in cities %}
+              <option value="{{ city.id }}">{{ city.name }}</option>
+            {% endfor %}
+          </select>
+           <select name="kategori-psu" id="kategori-psu">
+            <option value="0">-- All Kategori Psu --</option>
+            {% for item in category %}
+                <option value="{{ item.id }}">{{ item.nama_kategori }}</option>
+            {% endfor %}
+          </select>
+           <select name="jenis-psu" id="jenis-psu">
+<!--            <option value="0">&#45;&#45; All Jenis PSU &#45;&#45;</option>-->
+<!--            {% for item in jenis %}-->
+<!--                <option value="{{ item.id }}">{{ item.name }}</option>-->
+<!--            {% endfor %}-->
+          </select>
+<!--          <select name="rth-desa" id="rth-desa">-->
+<!--        </select>-->
+<!--          <select name="rth-category" id="rth-category" style="display:none">-->
+<!--            <option value="0">Semua Kategori</option>-->
+<!--            {% for item in category %}-->
+<!--                <option value="{{ item.id }}">{{ item.name }}</option>-->
+<!--            {% endfor %}-->
+<!--          </select>-->
+
+    </div>
+    <div id="map" class="map"></div>
+  </div>
+</div>
+{% endblock %}

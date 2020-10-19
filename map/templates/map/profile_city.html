@@ -1,0 +1,59 @@
+{% extends "map/base_site.html" %}
+{% load static %}
+
+{% block extrastyles %}
+<!-- Leaflet -->
+<link href="{% static "default/vendor/leaflet/leaflet.css" %}" rel="stylesheet" media="screen">
+<style>
+    .text-labels {
+            font-size: 1em;
+            font-weight: 700;
+            color: white;
+            /* Use color, background, set margins for offset, etc */
+        }
+</style>
+{% endblock %}
+
+{% block extrajs %}
+<script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js" integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA==" crossorigin=""></script>
+<script defer src="{% static "default/vendor/leaflet/leaflet.ajax.min.js" %}"></script>
+<script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+<script defer src="{% static "default/js/library.js" %}"></script>
+<script defer src="{% static "default/js/profile-city.js" %}"></script>
+{% endblock %}
+
+{% block content %}
+<div class="modal fade bd-example-modal-lg" id="map-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-body">
+            <div class="row justify-content-md-center" id="map-content"></div>
+        </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div id="map" class="map"></div>
+        <div id="filter-wrapper">
+            <input id="urls" value="{% url 'map:profile_desa_filter' %}" hidden>
+            <input type="text" value="{% csrf_token %}" id="token">
+            <form name="map-filter" id="map-filter">
+                <select class="test" name="filter" id="filter">
+                    <option>-- Pilih Kecamatan --</option>
+                    <option value="{% url 'map:profile_city_view' 0 %}">Semua Lokasi</option>
+                    {% for city in cities %}
+                        <option value="{% url 'map:profile_city_view' city.id %}">{{ city.area_type }} {{ city.name }}</option>
+                    {% endfor %}
+                </select>
+                <select name="desa" id="desa">
+                    <option>-- Pilih Desa --</option>
+                </select>
+            <form action="{% url 'map:profile_rth_filter' %}" name="map-filter" id="map-filter">
+        </div>
+    </div>
+</div>
+{% endblock %}
+

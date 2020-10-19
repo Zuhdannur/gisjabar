@@ -1,0 +1,60 @@
+{% extends "map/base.html" %}
+{% load i18n %}
+
+{% block title %}SIRTH - {{ site_title|default:_('Map') }}{% endblock %}
+
+{% block branding %}
+<!-- Logo -->
+<a class="navbar-brand" href="#">Dinas Pemukiman dan Perumahan</a>
+{% endblock %}
+
+{% block sidebar %}
+<!-- Sidebar -->
+<div id="sidebar-wrapper">
+  <ul class="sidebar-nav">
+    <li {% if request.resolver_match.url_name == 'index' %}class="active"{% endif %}>
+      <a href="{% url 'map:index' %}">
+        <i class="fas fa-home"></i>
+        Beranda
+      </a>
+    </li>
+<!--    <li {% if request.resolver_match.url_name == 'profile_city' %}class="active"{% endif %}>-->
+<!--      <a href="{% url 'map:profile_city' %}">-->
+<!--        <i class="fas fa-map"></i>-->
+<!--        Profil Kecamatan-->
+<!--      </a>-->
+<!--    </li>-->
+    <li {% if request.resolver_match.url_name == 'profile_rth' %}class="active"{% endif %}>
+      <a href="{% url 'map:profile_rth' %}">
+        <i class="fas fa-map"></i>
+        Profil Peta PSU
+      </a>
+    </li>
+    <li {% if request.resolver_match.url_name == 'regulation' %}class="active"{% endif %}>
+      <a href="{% url 'map:regulation' %}">
+        <i class="fas fa-book"></i>
+        Download
+      </a>
+    </li>
+    <li {% if request.resolver_match.url_name == 'article' %}class="active"{% endif %}>
+      <a href="{% url 'map:article' %}">
+        <i class="fas fa-newspaper"></i>
+        Artikel
+      </a>
+    </li>
+    <li {% if request.resolver_match.url_name == 'gallery' %}class="active"{% endif %}>
+      <a href="{% url 'map:gallery' %}">
+        <i class="fas fa-images"></i>
+        Gallery
+      </a>
+    </li>
+    <li {% if request.resolver_match.url_name == 'page' %}class="active"{% endif %}>
+      <a href="{% url 'page' 'contact' %}">
+        <i class="fas fa-phone-square"></i>
+        Kontak
+      </a>
+    </li>
+  </ul>
+</div>
+<!-- /#sidebar-wrapper -->
+{% endblock %}

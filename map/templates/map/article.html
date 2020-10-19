@@ -1,0 +1,33 @@
+{% extends "map/base_site.html" %}
+{% load static %}
+
+{% block content %}
+{% if articles %}
+<div class="row">
+  <div class="col-lg-12">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Title</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for article in articles %}
+          <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>
+              <a href="{% url 'map:article_view' article.id %}">
+                {{ article.title }}
+              </a>
+            </td>
+          </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% else %}
+    <p>Tidak ada file tersedia.</p>
+{% endif %}
+{% endblock %}
