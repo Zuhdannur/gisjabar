@@ -40,7 +40,7 @@ $(document).ready(function () {
             var originalUrl = window.location.origin;
 
            var isAll = false
-           if($("#city option:selected").text() == "-- Semua Desa --") {
+           if($("#city option:selected").text() == "-- SEMUA PETA KSK --") {
              isAll = true
            }
             $.ajax({

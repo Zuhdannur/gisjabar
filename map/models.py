@@ -182,7 +182,6 @@ class DesaProfile(models.Model):
 
 class MapDesa(models.Model):
     name = models.CharField(max_length=200, unique=True)
-    kecamatan = models.ForeignKey('Map', on_delete=models.PROTECT, default=0)
     geojson = models.FileField(
         upload_to='maps/dasar-desa/',
         validators=[V.FileExtensionValidator(allowed_extensions=['geojson'])]
@@ -192,8 +191,8 @@ class MapDesa(models.Model):
     longitude = models.FloatField(default=0)
 
     class Meta:
-        verbose_name = 'Peta Dasar Desa'
-        verbose_name_plural = 'Daftar Peta Dasar Desa'
+        verbose_name = 'Peta Dasar KSK'
+        verbose_name_plural = 'Daftar Peta Dasar KSK'
 
     def __str__(self):
         return self.name
@@ -212,8 +211,8 @@ class PsuProfile(models.Model):
     description = RichTextUploadingField(null=True, blank=True)
 
     class Meta:
-        verbose_name = 'Profil Desa PSU'
-        verbose_name_plural = 'Profil Desa PSU'
+        verbose_name = 'Profil KSK PSU'
+        verbose_name_plural = 'Profil KSK PSU'
 
     def __str__(self):
         return self.desa.name
@@ -221,7 +220,6 @@ class PsuProfile(models.Model):
 
 class KategoriPsu(models.Model):
     nama_kategori = models.CharField(max_length=200, default='')
-    nama_jenis = models.CharField(max_length=200, default='')
 
     class Meta:
         verbose_name = 'Kategori PSU'

@@ -44,7 +44,7 @@
         <form action="{% url 'map:profile_rth_filter' %}" name="map-filter" id="map-filter">
           {% csrf_token %}
           <select name="city" id="city">
-            <option value="">-- Semua Desa --</option>
+            <option value="">-- SEMUA PETA KSK --</option>
             {% for city in cities %}
               <option value="{{ city.id }}">{{ city.name }}</option>
             {% endfor %}

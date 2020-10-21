@@ -178,7 +178,7 @@ class PsuProfileAdmin(admin.ModelAdmin):
 
 
 class KategoriPsuAdmin(admin.ModelAdmin):
-    list_display = ('id', 'nama_kategori', 'nama_jenis')
+    list_display = ('id', 'nama_kategori')
 
 
 admin.site.register(ImageSlider, ImageSliderAdmin)
